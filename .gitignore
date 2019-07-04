@@ -3,3 +3,4 @@ docker-compose.yml
 development/admin
 development/.composer
 composer.phar
+data
