@@ -68,10 +68,12 @@ run-cron: ## Run Cron
 load-templates: ## Reload templates
 	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:templates:load
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
+	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
 cc: ## Clear the admin cache
 	docker-compose exec admin-php /opt/development/scripts/console.sh cache:clear
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
+	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
 xdebug: ## Start xdebug for the admin-php container.
 	docker-compose exec admin-php xdebug-start
@@ -87,6 +89,7 @@ import-data: ## Copy files from data/uploads to volume - imports database fron d
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display os2display < data/dump.sql
 	docker-compose exec admin-php /opt/development/scripts/console.sh doctrine:migrations:migrate
 	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:reindex
+	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:templates:load
 
 import-font:
 	sudo chown -R dkagms:dkagms development
