@@ -81,11 +81,20 @@ configure-kubectl: ## Configure local kubectl with a context for our cluster.
 
 import-data: ## Copy files from data/uploads to volume - imports database fron data/dump.sql
 	docker cp data/uploads $$(docker-compose ps -q admin-php):/var/www/admin/web
+	docker-compose exec admin-php chown -R www-data:www-data /var/www/admin/web/uploads
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display -e 'drop database os2display;'
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display -e 'create database os2display;'
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display os2display < data/dump.sql
 	docker-compose exec admin-php /opt/development/scripts/console.sh doctrine:migrations:migrate
 	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:reindex
+
+import-font:
+	sudo chown -R dkagms:dkagms development
+	for f in development/admin/vendor/bibsdb/*; do \
+	cp -R data/fonts "$$f"/Resources/public/assets ; \
+	done
+	sudo chown -R 33:33 development
+
 
 # =============================================================================
 # HELPERS
