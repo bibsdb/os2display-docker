@@ -99,7 +99,7 @@ import-font:
 	sudo chown -R 33:33 development
 
 update-bundles: ## Update bibsdb-bundles
-	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle
+	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle -v
 
 
 # =============================================================================
