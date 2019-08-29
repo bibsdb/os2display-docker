@@ -101,9 +101,11 @@ import-font:
 update-bundles: ## Update bibsdb-bundles
 	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update os2display/youtube-bundle os2display/vimeo-bundle bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle -v
 
-dev-mode: ## Make vendor-folder writable to enable coding
+dev-mode-on: ## Make vendor-folder writable to enable coding
 	sudo chown -R dkagms:dkagms development/admin/vendor
 
+dev-mode-off: ## Make vendor-folder writable to enable coding
+	sudo chown -R 33:33 development/admin/vendor
 
 
 
