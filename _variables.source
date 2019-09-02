@@ -2,6 +2,10 @@
 MAIN_IMAGE_REPOSITORY=reload
 PROJECT_IMAGE_REPOSITORY=reload
 
+# Repository and branch that should be used when cloning admin.
+ADMIN_REPOSITORY=git@github.com:reload/os2display-admin.git
+ADMIN_REPOSITORY_BRANCH=reload-develop
+
 DOCKER_BASE_DOMAIN=reload-os2display.docker
 
 # Support images that does not contain any project-code, thus we track eg. 
@@ -17,7 +21,7 @@ ADMIN_NGINX_BUILD_TAG=reload-0.1.0
 # As a rule of thumb you should always bump the build tag if you intent to
 # push a new version of the image regardless of whether you've also bumped the
 # source-tag.
-ADMIN_PHP_BUILD_TAG=reload-1.1.0
+ADMIN_PHP_BUILD_TAG=reload-2.1.0
 
 # Core os2display projects, the tags follow the version projects.
 # We still add a "build" tag to have something to increment if a change is made

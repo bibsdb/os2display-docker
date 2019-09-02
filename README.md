@@ -1,9 +1,39 @@
 # Infrastructure for Os2Display
 
-The repository contains a Docker setup for running locally and images for running on production.
+The repository contains a Docker setup for developing os2display.
+
+## Project-specific customizations
+Clone this project, then customize `_variables.source`. You should at the very least update `ADMIN_REPOSITORY` and `ADMIN_REPOSITORY_BRANCH` to reference your `admin` fork.
+
+## Changes to admin
+You must make the following changes to your `admin` fork to be compatible with the docker-setup.
+
+First add support for patches during composer-install.
+```shell
+docker-compose run \
+  -e COMPOSER_MEMORY_LIMIT=-1 \
+  admin-php \
+  composer require cweagans/composer-patches:~1.0
+```
+(The composer dependencygraph is quite large so we need to cancel the memory-limit an keep our fingers crossed, you probably need about 3-4 gigabytes of available memory in the container).
+
+Add a patch to support non-localhost elasticsearch (until https://github.com/os2display/admin/pull/20 gets merged).
+```shell
+{
+  "require": {
+    "cweagans/composer-patches": "~1.0",
+  },
+  "extra": {
+    "patches": {
+      "os2display/admin-bundle": {
+        "Switch to supporting a separate configuration for the public search hostname": "patches/admin-bundle-public-search.patch"
+      }
+    }
+  }
+}
+```
 
 ## Development
-
 To get started you need the following:
 1. Install [Docker](https://docs.docker.com/install/)
 2. Install [Docker Compose](https://docs.docker.com/compose/install/)

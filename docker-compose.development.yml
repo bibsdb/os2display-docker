@@ -5,19 +5,20 @@ services:
   admin-nginx:
     environment:
       VIRTUAL_HOST: admin.${DOCKER_BASE_DOMAIN}
-      APP_ENV: "dev"
-      APP_DEBUG: "1"
+      SYMFONY_ENV: "dev"
+      SYMFONY_DEBUG: "1"
 
   admin-php:
     environment:
       PHP_IDE_CONFIG: "serverName=admin.${DOCKER_BASE_DOMAIN}"
-      APP_ENV: "dev"
-      APP_DEBUG: "1"
+      SYMFONY_ENV: "dev"
+      SYMFONY_DEBUG: "1"
 
   admin-cron:
     environment:
-      APP_ENV: "dev"
-      APP_DEBUG: "1"
+      PHP_IDE_CONFIG: "serverName=cron.${DOCKER_BASE_DOMAIN}"
+      SYMFONY_ENV: "dev"
+      SYMFONY_DEBUG: "1"
 
 volumes:
   admin-release:

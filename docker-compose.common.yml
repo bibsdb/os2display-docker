@@ -9,7 +9,7 @@ services:
       - 80
     volumes:
       - admin-release:/var/www
-      - symfony-cache:/var/www/admin/app/cache
+      - symfony-cache:/var/www/admin/var
       - admin-uploads:/var/www/admin/web/uploads
     # We need search and middleware to be resolvable before starting or nginx
     # will crash.
@@ -24,17 +24,18 @@ services:
     volumes:
       - admin-release:/var/www
       - admin-uploads:/var/www/admin/web/uploads
-      - symfony-cache:/var/www/admin/app/cache
-      - ./development/config/admin/parameters.yml:/var/www/admin/app/config/parameters.yml
+      - symfony-cache:/var/www/admin/var
+      - ./development/admin/docker/parameters.yml:/var/www/admin/app/config/parameters.yml
       - ./development/scripts:/opt/development/scripts
+      - ./development/state-import:/opt/development/state-import
 
   admin-cron:
     image: ${MAIN_IMAGE_REPOSITORY}/os2display-admin-php:${ADMIN_PHP_BUILD_TAG}
     volumes:
       - admin-release:/var/www
       - admin-uploads:/var/www/admin/web/uploads
-      - symfony-cache:/var/www/admin/app/cache
-      - ./development/config/admin/parameters.yml:/var/www/admin/app/config/parameters.yml
+      - symfony-cache:/var/www/admin/var
+      - ./development/admin/docker/parameters.yml:/var/www/admin/app/config/parameters.yml
       - ./development/scripts:/opt/development/scripts
     command: jobber-entrypoint.sh
 
@@ -69,7 +70,7 @@ services:
     ports:
       - 80
     volumes:
-      - './development/config/screen/config.js:/var/www/screen/app/config.js'
+      - './development/admin/docker/screen-config.js:/var/www/screen/app/config.js'
     environment:
       VIRTUAL_HOST: screen.${DOCKER_BASE_DOMAIN}
     # We proxy these so need them to exist.
@@ -86,6 +87,7 @@ services:
       MYSQL_PASSWORD: os2display
     volumes:
       - db-data:/var/lib/mysql
+      - ${DB_DUMP}
 
   mailhog:
     image: mailhog/mailhog

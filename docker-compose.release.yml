@@ -12,23 +12,23 @@ services:
       - admin_release
     environment:
       VIRTUAL_HOST: admin.${DOCKER_BASE_DOMAIN}
-      APP_ENV: "prod"
-      APP_DEBUG: "0"
+      SYMFONY_ENV: "prod"
+      SYMFONY_DEBUG: "0"
 
   admin-php:
     depends_on:
       - admin_release
     environment:
       PHP_IDE_CONFIG: "serverName=admin.${DOCKER_BASE_DOMAIN}"
-      APP_ENV: "prod"
-      APP_DEBUG: "0"
+      SYMFONY_ENV: "prod"
+      SYMFONY_DEBUG: "0"
 
   admin-cron:
     depends_on:
       - admin_release
     environment:
-      APP_ENV: "prod"
-      APP_DEBUG: "0"
+      SYMFONY_ENV: "prod"
+      SYMFONY_DEBUG: "0"
 
   # Contains the latest source-release.
   # It will get admin-release mounted as the first container, and copy the

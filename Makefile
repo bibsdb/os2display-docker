@@ -9,6 +9,13 @@
 include _variables.source
 export
 
+# Mount database-dump if present.
+ifeq (,$(wildcard development/state-import/admin.sql.gz))
+DB_DUMP = ./docker-compose.yml:/tmp/ignore-me:ro
+else
+DB_DUMP = ./development/state-import/admin.sql.gz:/docker-entrypoint-initdb.d/admin.sql.gz:ro
+endif
+
 help: ## Display a list of the public targets
 # Find lines that starts with a word-character, contains a colon and then a
 # doublehash (underscores are not word-characters, so this excludes private
@@ -48,30 +55,33 @@ clone-admin: ## Do an initial clone of the admin repo.
 	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	sudo chown -R 33:33 development
 
+
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
-# 	docker run \
-# 		-v $(PWD)/development/admin/src/my-custom-bundle/:/app \
-# 		-w /app \
-# 		node:8.16.0-slim \
-# 		sh -c "yarn && yarn run gulp"
+#	docker run \
+#		-ti \
+#		-v $(PWD)/development/admin/:/app \
+#		-w /app/src/my-custom-bundle/ \
+#		node:8.16.0-slim \
+#		sh -c "yarn && yarn run gulp"
 
 ifeq (,$(wildcard ./docker-compose.override.yml))
     dc_override =
 else
     dc_override = -f docker-compose.override.yml
 endif
+
 run-cron: ## Run Cron
 # Differentiate how to run composer depending on whether we have an override.
 	docker-compose -f docker-compose.yml $(dc_override) run --rm admin-cron run_os2display_cron.sh
 
 load-templates: ## Reload templates
-	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:templates:load
+	docker-compose exec admin-php bin/console os2display:core:templates:load
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
 	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
 cc: ## Clear the admin cache
-	docker-compose exec admin-php /opt/development/scripts/console.sh cache:clear
+	docker-compose exec admin-php bin/console cache:clear
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
 	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
