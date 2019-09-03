@@ -17,7 +17,7 @@ services:
       - middleware
       - search
     environment:
-      VIRTUAL_HOST: admin${DOCKER_BASE_DOMAIN}
+      VIRTUAL_HOST: admin.${DOCKER_BASE_DOMAIN}
 
   admin-php:
     image: ${MAIN_IMAGE_REPOSITORY}/os2display-admin-php:${ADMIN_PHP_BUILD_TAG}
@@ -49,7 +49,7 @@ services:
     ports:
       - 3010
     environment:
-      VIRTUAL_HOST: search${DOCKER_BASE_DOMAIN}
+      VIRTUAL_HOST: search.${DOCKER_BASE_DOMAIN}
     depends_on:
       - elasticsearch
 
@@ -61,7 +61,7 @@ services:
     ports:
       - 3020
     environment:
-      VIRTUAL_HOST: middleware${DOCKER_BASE_DOMAIN}
+      VIRTUAL_HOST: middleware.${DOCKER_BASE_DOMAIN}
     depends_on:
       - redis
 
@@ -72,7 +72,7 @@ services:
     volumes:
       - './development/admin/docker/screen-config.js:/var/www/screen/app/config.js'
     environment:
-      VIRTUAL_HOST: screen${DOCKER_BASE_DOMAIN}
+      VIRTUAL_HOST: screen.${DOCKER_BASE_DOMAIN}
     # We proxy these so need them to exist.
     depends_on:
       - middleware
