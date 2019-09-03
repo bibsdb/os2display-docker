@@ -3,8 +3,8 @@ MAIN_IMAGE_REPOSITORY=reload
 PROJECT_IMAGE_REPOSITORY=reload
 
 # Repository and branch that should be used when cloning admin.
-ADMIN_REPOSITORY=git@github.com:reload/os2display-admin.git
-ADMIN_REPOSITORY_BRANCH=reload-develop
+ADMIN_REPOSITORY=git@github.com:bibsdb/os2display-admin.git
+ADMIN_REPOSITORY_BRANCH=bibsdb-develop
 
 DOCKER_BASE_DOMAIN=reload-os2display.docker
 
