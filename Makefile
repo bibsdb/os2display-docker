@@ -54,7 +54,6 @@ $(diagrams): documentation/diagrams/%.png : documentation/diagrams/%.plantuml
 clone-admin: ## Do an initial clone of the admin repo.
 	sudo rm -Rf development/admin
 	sudo chown -R dkagms:dkagms development
-	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	git clone --branch=$(ADMIN_REPOSITORY_BRANCH) $(ADMIN_REPOSITORY) development/admin
 	sudo chown -R 33:33 development
 
@@ -160,9 +159,9 @@ _show_notes:
 	$(info OS2display now is available via the URLs below)
 	$(info )
 	$(info NOTICE: You should visit each url at least once and accept the self-signed https certificate)
-	$(info - Admin: https://admin.$(DOCKER_BASE_DOMAIN))
-	$(info - Screen: https://screen.$(DOCKER_BASE_DOMAIN))
-	$(info - Search: https://search.$(DOCKER_BASE_DOMAIN))
+	$(info - Admin: https://admin$(DOCKER_BASE_DOMAIN))
+	$(info - Screen: https://screen$(DOCKER_BASE_DOMAIN))
+	$(info - Search: https://search$(DOCKER_BASE_DOMAIN))
 
 .PHONY: help reset-dev reset-dev-nfs reset-release up stop logs clone-admin run-cron load-templates cc xdebug configure-kubectl _reset-container-state _dc_compile_release _dc_compile_dev _show_notes
 
