@@ -99,9 +99,9 @@ import-data: ## Copy files from data/uploads to volume - imports database fron d
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display -e 'drop database os2display;'
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display -e 'create database os2display;'
 	docker exec -i $$(docker-compose ps -q admin-db) mysql -u os2display -pos2display os2display < data/dump.sql
-	docker-compose exec admin-php /opt/development/scripts/console.sh doctrine:migrations:migrate
-	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:reindex
-	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:templates:load
+	docker-compose exec admin-php bin/console doctrine:migrations:migrate
+	docker-compose exec admin-php bin/console os2display:core:reindex
+	docker-compose exec admin-php bin/console os2display:core:templates:load
 
 import-font:
 	sudo chown -R dkagms:dkagms development
