@@ -24,6 +24,8 @@ help: ## Display a list of the public targets
 
 reset-dev: _dc_compile_dev _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
 
+reset-prod: _dc_compile_prod _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
+
 reset-dev-nfs: _dc_compile_dev_nfs _reset-container-state _show_notes ## Development-mode with NFS: stop all containers, reset their state and start up again.
 
 reset-release: _dc_compile_release _reset-container-state _show_notes ## Release-test mode: stop all containers, reset their state and start up again.
@@ -53,6 +55,7 @@ clone-admin: ## Do an initial clone of the admin repo.
 	sudo rm -Rf development/admin
 	sudo chown -R dkagms:dkagms development
 	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
+	git clone --branch=$(ADMIN_REPOSITORY_BRANCH) $(ADMIN_REPOSITORY) development/admin
 	sudo chown -R 33:33 development
 
 
@@ -146,6 +149,9 @@ _dc_compile_release:
 
 _dc_compile_dev:
 	docker-compose -f docker-compose.common.yml -f docker-compose.development.yml config > docker-compose.yml
+
+_dc_compile_prod:
+	docker-compose -f docker-compose.common.yml -f docker-compose.production.yml config > docker-compose.yml
 
 _dc_compile_dev_nfs:
 	docker-compose -f docker-compose.common.yml -f docker-compose.development.yml -f docker-compose.development.nfs.yml $(dc_override) config > docker-compose.yml
