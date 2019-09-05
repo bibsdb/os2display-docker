@@ -30,8 +30,10 @@ services:
       - middleware
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /etc/ssl/nginx:/etc/nginx/certs
 
 volumes:
   admin-release:
