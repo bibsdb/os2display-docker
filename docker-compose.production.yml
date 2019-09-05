@@ -20,6 +20,19 @@ services:
       SYMFONY_ENV: "prod"
       SYMFONY_DEBUG: "0"
 
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    depends_on:
+      - admin-nginx
+      - admin-php
+      - screen
+      - search
+      - middleware
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
 volumes:
   admin-release:
     driver_opts:
