@@ -6,7 +6,7 @@ PROJECT_IMAGE_REPOSITORY=reload
 ADMIN_REPOSITORY=git@github.com:bibsdb/os2display-admin.git
 ADMIN_REPOSITORY_BRANCH=bibsdb-develop
 
-DOCKER_BASE_DOMAIN=reload-os2display.docker
+DOCKER_BASE_DOMAIN=teknik.local
 
 # Support images that does not contain any project-code, thus we track eg. 
 # configuration-changes and general software updates via a "build" tag.
