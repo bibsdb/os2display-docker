@@ -21,6 +21,8 @@ reset-dev-nfs: _dc_compile_dev_nfs _reset-container-state _show_notes ## Develop
 
 reset-release: _dc_compile_release _reset-container-state _show_notes ## Release-test mode: stop all containers, reset their state and start up again.
 
+reset-prod: _dc_compile_prod _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
+
 up:  ## Take the whole environment up without altering the existing state of the containers.
 	docker-compose up -d --remove-orphans
 
@@ -106,6 +108,9 @@ _dc_compile_dev:
 
 _dc_compile_dev_nfs:
 	docker-compose -f docker-compose.common.yml -f docker-compose.development.yml -f docker-compose.development.nfs.yml $(dc_override) config > docker-compose.yml
+
+_dc_compile_prod:
+	docker-compose -f docker-compose.common.yml -f docker-compose.production.yml config > docker-compose.yml
 
 _show_notes:
 	$(info OS2display now is available via the URLs below)
