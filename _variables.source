@@ -2,7 +2,7 @@
 MAIN_IMAGE_REPOSITORY=reload
 PROJECT_IMAGE_REPOSITORY=reload
 
-DOCKER_BASE_DOMAIN=reload-os2display.docker
+DOCKER_BASE_DOMAIN=os2display.teknik.local
 
 # Support images that does not contain any project-code, thus we track eg. 
 # configuration-changes and general software updates via a "build" tag.
