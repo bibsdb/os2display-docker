@@ -5,19 +5,18 @@ services:
   admin-nginx:
     environment:
       VIRTUAL_HOST: admin.${DOCKER_BASE_DOMAIN}
-      APP_ENV: "prod"
+      APP_ENV: "dev"
       APP_DEBUG: "0"
 
   admin-php:
     environment:
       PHP_IDE_CONFIG: "serverName=admin.${DOCKER_BASE_DOMAIN}"
-      APP_ENV: "prod"
+      APP_ENV: "dev"
       APP_DEBUG: "0"
 
   admin-cron:
     environment:
-      PHP_IDE_CONFIG: "serverName=cron.${DOCKER_BASE_DOMAIN}"
-      APP_ENV: "prod"
+      APP_ENV: "dev"
       APP_DEBUG: "0"
 
   nginx-proxy:
