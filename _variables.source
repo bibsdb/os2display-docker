@@ -1,6 +1,6 @@
 # Various variables used during build and local docker-supported development.
-MAIN_IMAGE_REPOSITORY=reload
-PROJECT_IMAGE_REPOSITORY=reload
+MAIN_IMAGE_REPOSITORY=bibsdb
+PROJECT_IMAGE_REPOSITORY=bibsdb
 
 DOCKER_BASE_DOMAIN=os2display.teknik.local
 
