@@ -23,6 +23,7 @@ reset-release: _dc_compile_release _reset-container-state _show_notes ## Release
 
 reset-prod: _dc_compile_prod _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
 
+
 up:  ## Take the whole environment up without altering the existing state of the containers.
 	docker-compose up -d --remove-orphans
 
@@ -49,6 +50,10 @@ clone-admin: ## Do an initial clone of the admin repo.
 	sudo chown -R dkagms:dkagms development
 	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	sudo chown -R 33:33 development
+
+prod-env:
+	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
+
 
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
