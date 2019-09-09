@@ -47,7 +47,7 @@ $(diagrams): documentation/diagrams/%.png : documentation/diagrams/%.plantuml
 clone-admin: ## Do an initial clone of the admin repo.
 	sudo rm -Rf development/admin
 	sudo chown -R dkagms:dkagms development
-	git clone --branch=$(ADMIN_REPOSITORY_BRANCH) $(ADMIN_REPOSITORY) development/admin
+	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	sudo chown -R 33:33 development
 
 # Add this make-target if you have a custom bundle you want to run gulp against.
