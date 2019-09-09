@@ -70,10 +70,12 @@ run-cron: ## Run Cron
 load-templates: ## Reload templates
 	docker-compose exec admin-php /opt/development/scripts/console.sh os2display:core:templates:load
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
+	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
 cc: ## Clear the admin cache
 	docker-compose exec admin-php /opt/development/scripts/console.sh cache:clear
 	docker-compose exec admin-php chown -R www-data:www-data app/cache
+	docker-compose exec admin-php chown -R www-data:www-data var/cache
 
 xdebug: ## Start xdebug for the admin-php container.
 	docker-compose exec admin-php xdebug-start
