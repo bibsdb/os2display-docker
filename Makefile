@@ -45,7 +45,10 @@ $(diagrams): documentation/diagrams/%.png : documentation/diagrams/%.plantuml
 	cat $< | docker run --rm -i think/plantuml -tpng > $@
 
 clone-admin: ## Do an initial clone of the admin repo.
-	git clone --branch=reload-develop  git@github.com:reload/os2display-admin.git development/admin
+	sudo rm -Rf development/admin
+	sudo chown -R dkagms:dkagms development
+	git clone --branch=$(ADMIN_REPOSITORY_BRANCH) $(ADMIN_REPOSITORY) development/admin
+	sudo chown -R 33:33 development
 
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
