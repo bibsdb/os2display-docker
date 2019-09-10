@@ -4,12 +4,12 @@
 window.config = {
   // Used to activate screen (rest API) and load resources.
   "resource": {
-    "server": "//screen.os2display.teknik.local/",
+    "server": "//screen.os2display.docker/",
     "uri": 'proxy'
   },
   // Used by web-socket.
   "ws": {
-    "server": "//screen.os2display.teknik.local/"
+    "server": "//screen.os2display.docker/"
   },
   // API key to use.
   "apikey": "059d9d9c50e0c45b529407b183b6a02f",

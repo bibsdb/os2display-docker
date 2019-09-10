@@ -2,7 +2,7 @@
 MAIN_IMAGE_REPOSITORY=bibsdb
 PROJECT_IMAGE_REPOSITORY=bibsdb
 
-DOCKER_BASE_DOMAIN=os2display.teknik.local
+DOCKER_BASE_DOMAIN=os2display.docker
 
 # Support images that does not contain any project-code, thus we track eg. 
 # configuration-changes and general software updates via a "build" tag.
