@@ -53,9 +53,9 @@ clone-admin: ## Do an initial clone of the admin repo.
 
 prod-env:
 	# Replace dev-url with prod-url
-	sed -i 's/os2display.docker/os2display.teknik.local/g' _variable.source
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' config/admin/parameters.yml
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' config/screen/config.js
+	sed -i 's/os2display.docker/os2display.teknik.local/g' _variables.source
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/screen/config.js
 	# Copy prod config to dev config. If environment is changed in variable system won't start.
 	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
 
