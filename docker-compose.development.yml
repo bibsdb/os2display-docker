@@ -19,6 +19,21 @@ services:
       APP_ENV: "dev"
       APP_DEBUG: "1"
 
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    depends_on:
+      - admin-nginx
+      - admin-php
+      - screen
+      - search
+      - middleware
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /etc/ssl/nginx:/etc/nginx/certs
+
 volumes:
   admin-release:
     driver_opts:
