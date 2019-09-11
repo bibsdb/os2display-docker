@@ -15,13 +15,13 @@ help: ## Display a list of the public targets
 # targets), then strip the hash and print.
 	@grep -E -h "^\w.*:.*##" $(MAKEFILE_LIST) | sed -e 's/\(.*\):.*##\(.*\)/\1	\2/'
 
-reset-dev: _dev_env _dc_compile_dev _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
+reset-dev: _dc_compile_dev _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
 
 reset-dev-nfs: _dc_compile_dev_nfs _reset-container-state _show_notes ## Development-mode with NFS: stop all containers, reset their state and start up again.
 
 reset-release: _dc_compile_release _reset-container-state _show_notes ## Release-test mode: stop all containers, reset their state and start up again.
 
-reset-prod: _prod_env _dc_compile_prod _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
+reset-prod: _dc_compile_prod _reset-container-state _show_notes ## Development-mode: stop all containers, reset their state and start up again.
 
 
 up:  ## Take the whole environment up without altering the existing state of the containers.
@@ -50,6 +50,19 @@ clone-admin: ## Do an initial clone of the admin repo.
 	sudo chown -R dkagms:dkagms development
 	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	sudo chown -R 33:33 development
+
+dev-env:
+	sed -i 's/os2display.teknik.local/os2display.docker/g' _variables.source
+	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/screen/config.js
+	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/admin/parameters.yml
+	cd development/admin;	sudo git checkout app/config/config_dev.yml
+
+prod-env:
+	sed -i 's/os2display.docker/os2display.teknik.local/g' _variables.source
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/screen/config.js
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
+	# Copy prod config to dev config. If environment is changed in variable system won't start.
+	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
 
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
@@ -151,19 +164,6 @@ _show_notes:
 	$(info - Admin: https://admin.$(DOCKER_BASE_DOMAIN))
 	$(info - Screen: https://screen.$(DOCKER_BASE_DOMAIN))
 	$(info - Search: https://search.$(DOCKER_BASE_DOMAIN))
-
-_dev_env:
-	export DOCKER_BASE_DOMAIN=os2display.docker
-	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/screen/config.js
-	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/admin/parameters.yml
-	cd development/admin;	sudo git checkout app/config/config_dev.yml
-
-_prod_env:
-	export DOCKER_BASE_DOMAIN=os2display.teknik.local
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/screen/config.js
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
-	# Copy prod config to dev config. If environment is changed in variable system won't start.
-	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
 
 
 .PHONY: help reset-dev reset-dev-nfs reset-release up stop logs clone-admin run-cron load-templates cc xdebug configure-kubectl _reset-container-state _dc_compile_release _dc_compile_dev _show_notes
