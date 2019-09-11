@@ -43,6 +43,7 @@ services:
       - DB_USER=os2display
       - DB_PASS=os2display
       - DB_SERVER=admin-db
+      - DB_DUMP_BEGIN=+5
 
 
 volumes:
