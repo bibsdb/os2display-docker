@@ -38,7 +38,7 @@ services:
     image: databack/mysql-backup
     volumes:
       - /home/dkagms/db-backup:/db
-    env:
+    environment:
       - DB_DUMP_TARGET=/db
       - DB_USER=os2display
       - DB_PASS=os2display
