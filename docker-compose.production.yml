@@ -34,6 +34,17 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /etc/ssl/nginx:/etc/nginx/certs
 
+  db-backup:
+    image: databack/mysql-backup
+    volumes:
+      - /home/dkagms/db-backup:/db
+    env:
+      - DB_DUMP_TARGET=/db
+      - DB_USER=os2display
+      - DB_PASS=os2display
+      - DB_SERVER=admin-db
+
+
 volumes:
   admin-release:
     driver_opts:
