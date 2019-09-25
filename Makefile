@@ -56,6 +56,7 @@ dev-env:
 	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/screen/config.js
 	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/admin/parameters.yml
 	cd development/admin;	sudo git checkout app/config/config_dev.yml
+	sudo chown -R 33:33 development
 
 prod-env:
 	sed -i 's/os2display.docker/os2display.teknik.local/g' _variables.source
@@ -63,6 +64,7 @@ prod-env:
 	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
 	# Copy prod config to dev config. If environment is changed in variable system won't start.
 	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
+	sudo chown -R 33:33 development
 
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
