@@ -33,7 +33,7 @@ parameters:
     middleware_host: 'http://middleware:3020'
     middleware_path: /api
     middleware_apikey: 059d9d9c50e0c45b529407b183b6a02f
-    site_title: 'OS2 display Reload - docker'
+    site_title: 'OS2Display Sønderborg'
     version: dev
     itk_log_version: 1
     itk_log_error_callback: /api/error
