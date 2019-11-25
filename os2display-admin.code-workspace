@@ -4,5 +4,20 @@
 			"path": "development/admin"
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"configurations": [
+			{
+				"name": "Listen for XDebug",
+				"type": "php",
+				"request": "launch",
+				"port": 9000,
+				"pathMappings": {
+					"/var/www/admin/web": "/home/dkagms/os2display-docker/development/admin/web",
+				},
+			},
+		   
+		]
+
+	}
 }
