@@ -10,6 +10,7 @@ services:
 
   admin-php:
     environment:
+      XDEBUG_CONFIG: "idekey=VSCODE"
       PHP_IDE_CONFIG: "serverName=admin.${DOCKER_BASE_DOMAIN}"
       APP_ENV: "dev"
       APP_DEBUG: "1"
