@@ -51,21 +51,6 @@ clone-admin: ## Do an initial clone of the admin repo.
 	git clone --branch=bibsdb-develop  git@github.com:bibsdb/os2display-admin.git development/admin
 	sudo chown -R 33:33 development
 
-dev-env:
-	sed -i 's/os2display.teknik.local/os2display.docker/g' _variables.source
-	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/screen/config.js
-	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/admin/parameters.yml
-	cd development/admin;	sudo git checkout app/config/config_dev.yml
-	sudo chown -R 33:33 development
-
-prod-env:
-	sed -i 's/os2display.docker/os2display.teknik.local/g' _variables.source
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/screen/config.js
-	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
-	# Copy prod config to dev config. If environment is changed in variable system won't start.
-	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
-	sudo chown -R 33:33 development
-
 # Add this make-target if you have a custom bundle you want to run gulp against.
 # run-gulp:
 # 	docker run \
@@ -119,11 +104,32 @@ import-font:
 update-bundles: ## Update bibsdb-bundles
 	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update os2display/youtube-bundle os2display/vimeo-bundle bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle -v
 
-dev-mode-on: ## Make vendor-folder writable to enable coding
+bundle-devel-on: ## Make vendor-folder writable to enable coding
 	sudo chown -R dkagms:dkagms development/admin/vendor
 
-dev-mode-off: ## Make vendor-folder writable to enable coding
+bundle-devel-off: ## Make vendor-folder writable to enable coding
 	sudo chown -R 33:33 development/admin/vendor
+
+admin-build-on: ## Make admin-folder writable to enable re-build
+	sudo chown -R dkagms:dkagms development/admin
+
+admin-build-off: ## Make admin-folder writable to enable re-build
+	sudo chown -R 33:33 development/admin
+
+environment-dev: ## Setup dev-environment
+	sed -i 's/os2display.teknik.local/os2display.docker/g' _variables.source
+	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/screen/config.js
+	sudo sed -i 's/os2display.teknik.local/os2display.docker/g' development/config/admin/parameters.yml
+	cd development/admin;	sudo git checkout app/config/config_dev.yml
+	sudo chown -R 33:33 development
+
+environment-prod: ## Setup prod-environment
+	sed -i 's/os2display.docker/os2display.teknik.local/g' _variables.source
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/screen/config.js
+	sudo sed -i 's/os2display.docker/os2display.teknik.local/g' development/config/admin/parameters.yml
+	# Copy prod config to dev config. If environment is changed in variable system won't start.
+	sudo cp -f development/admin/app/config/config_prod.yml development/admin/app/config/config_dev.yml
+	sudo chown -R 33:33 development
 
 # =============================================================================
 # HELPERS
