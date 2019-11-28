@@ -94,7 +94,7 @@ import-data: ## Copy files from data/uploads to volume - imports database fron d
 	docker-compose exec admin-php bin/console os2display:core:reindex
 	docker-compose exec admin-php bin/console os2display:core:templates:load
 
-import-font:
+import-font: ## Copy fonts into all bibsdb template bundles
 	sudo chown -R dkagms:dkagms development
 	for f in development/admin/vendor/bibsdb/*; do \
 	cp -R data/fonts "$$f"/Resources/public/assets ; \
