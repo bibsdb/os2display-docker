@@ -6,7 +6,7 @@
 	],
 	"settings": {},
 	"launch": {
-		"configurations": [
+		"configurations": [		
 			{
 				"name": "Listen for XDebug",
 				"type": "php",
