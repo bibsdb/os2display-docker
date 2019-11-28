@@ -110,10 +110,10 @@ bundle-devel-on: ## Make vendor-folder writable to enable coding
 bundle-devel-off: ## Make vendor-folder writable to enable coding
 	sudo chown -R 33:33 development/admin/vendor
 
-admin-build-on: ## Make admin-folder writable to enable re-build
+admin-write-on: ## Make admin-folder writable to enable re-build
 	sudo chown -R dkagms:dkagms development/admin
 
-admin-build-off: ## Make admin-folder writable to enable re-build
+admin-write-off: ## Make admin-folder writable to enable re-build
 	sudo chown -R 33:33 development/admin
 
 environment-dev: ## Setup dev-environment
