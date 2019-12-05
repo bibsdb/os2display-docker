@@ -4,3 +4,4 @@ development/admin
 development/.composer
 composer.phar
 data
+.gitconfig
