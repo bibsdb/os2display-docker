@@ -33,6 +33,7 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - $PWD/data/certs:/etc/nginx/certs
+      - "./nginx_proxy_upload_maxsize.conf:/etc/nginx/conf.d/nginx_proxy_upload_maxsize.conf"
 
   db-backup:
     image: databack/mysql-backup
