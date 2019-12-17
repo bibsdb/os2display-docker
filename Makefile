@@ -102,7 +102,7 @@ import-font: ## Copy fonts into all bibsdb template bundles
 	sudo chown -R 33:33 development
 
 update-bundles: ## Update bibsdb-bundles
-	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update os2display/youtube-bundle os2display/vimeo-bundle bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle -v
+	docker-compose exec -u www-data -e COMPOSER_MEMORY_LIMIT=-1 admin-php composer update bibsdb/portrait-portrait-bundle bibsdb/sonderborg-calendar-bundle bibsdb/info-portrait-bundle bibsdb/citation-portrait-bundle bibsdb/projector-screen-bundle -v
 
 bundle-devel-on: ## Make vendor-folder writable to enable coding
 	sudo chown -R dkagms:dkagms development/admin/vendor
