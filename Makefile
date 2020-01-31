@@ -112,9 +112,11 @@ bundle-devel-off: ## Make vendor-folder writable to enable coding
 
 admin-write-on: ## Make admin-folder writable to enable re-build
 	sudo chown -R dkagms:dkagms development/admin
+	sudo chown -R dkagms:dkagms development/config
 
 admin-write-off: ## Make admin-folder writable to enable re-build
 	sudo chown -R 33:33 development/admin
+	sudo chown -R 33:33 development/config
 
 environment-dev: ## Setup dev-environment
 	sed -i 's/os2display.teknik.local/os2display.docker/g' _variables.source
