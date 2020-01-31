@@ -46,10 +46,15 @@ services:
       - DB_SERVER=admin-db
       - DB_DUMP_BEGIN=+5
 
-
 volumes:
   admin-release:
     driver_opts:
       type: none
       device: $PWD/development
+      o: bind
+      
+  admin-uploads:
+    driver_opts:
+      type: none
+      device: $PWD/development/admin/web/uploads
       o: bind
