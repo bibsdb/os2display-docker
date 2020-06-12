@@ -4,7 +4,14 @@
 			"path": "development/admin"
 		}
 	],
-	"settings": {},
+	"settings": {
+		"files.associations": {
+			"*.module": "php",
+			"*.inc": "php",
+			"*.php": "php"
+		},
+		"editor.tabSize": 2
+	},
 	"launch": {
 		"configurations": [		
 			{

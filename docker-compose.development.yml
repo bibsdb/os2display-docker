@@ -10,7 +10,7 @@ services:
 
   admin-php:
     environment:
-      XDEBUG_CONFIG: "idekey=VSCODE"
+      XDEBUG_CONFIG: "idekey=VSCODE remote_host=172.18.0.1 remote_connect_back=0"
       PHP_IDE_CONFIG: "serverName=admin.${DOCKER_BASE_DOMAIN}"
       APP_ENV: "dev"
       APP_DEBUG: "1"

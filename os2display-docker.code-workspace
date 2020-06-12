@@ -4,5 +4,27 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.module": "php",
+			"*.inc": "php",
+			"*.php": "php"
+		},
+		"editor.tabSize": 2
+	},
+	"launch": {
+		"configurations": [		
+			{
+				"name": "Listen for XDebug",
+				"type": "php",
+				"request": "launch",
+				"port": 9000,
+				"pathMappings": {
+					"/var/www/admin": "/home/dkagms/os2display-docker/development/admin",
+				},
+			},
+		   
+		]
+
+	}
 }
